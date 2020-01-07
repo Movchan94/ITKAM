@@ -1,11 +1,26 @@
 .NavProducts {
   color : white;
+    text-decoration: none;
+}
+.NavProducts:hover {
+    background: grey;
+    border-radius: 5px;
+}
+.NavProducts:active {
+   color:darkslategray;
+}
 
+
+
+.NavCart {
+    color : white;
+    text-decoration: none;
 }
-.Navbar {
-  color: red;
+.NavCart:hover {
+    border-radius: 10px;
+    background: grey;
 }
-.APP {
- color: red;
+.NavCart:active {
+    color:darkslategray;
 }
 

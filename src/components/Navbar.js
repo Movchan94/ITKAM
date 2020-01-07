@@ -7,6 +7,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 
 const Navbar = () => {
@@ -27,17 +28,18 @@ const Navbar = () => {
     return (
         <div className={styles.Navbar}>
 
-            <AppBar className={styles.APP} position="static">
+            <AppBar  position="static">
                 <Toolbar>
                     <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
 
-                        <NavLink to='/'> <LogoShopIcon fontSize='large'/></NavLink>
+                        <NavLink className={styles.NavLogo} to='/'> <LogoShopIcon color ='action' fontSize='large'/></NavLink>
 
                     </IconButton>
                     <Typography className={classes.title}>
+                        <NavLink  className={styles.NavProducts} to='/'>Products </NavLink>
                     </Typography>
 
-                    <NavLink  className={styles.NavProducts} to='/'>Products </NavLink>
+                    <NavLink className={styles.NavCart} to='/cart'> <ShoppingCartIcon   fontSize='large'/></NavLink>
 
                 </Toolbar>
             </AppBar>

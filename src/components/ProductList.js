@@ -1,13 +1,19 @@
 import React from 'react'
 import Product from "./Product";
+import Title from "./Title";
 
+let state = {
+    products:[]
+}
 
 const ProductList =()=> {
 
     return (
-        <div>
-       <Product/>
-        </div>
+        <React.Fragment>
+            <div>
+               <Title name ='Our' title ='products'/>
+            </div>
+        </React.Fragment>
     )
 }
 

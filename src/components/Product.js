@@ -8,6 +8,8 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import {Link} from "react-router-dom";
+import {LinearProgress} from "@material-ui/core";
 
 const useStyles = makeStyles({
     card: {
@@ -25,6 +27,7 @@ export default function Product(props) {
 
     return (
         <Card className={classes.card}>
+            <Link to ='/details'>
             <CardActionArea>
                 <CardMedia
                     className={classes.media}
@@ -35,6 +38,7 @@ export default function Product(props) {
                     <Typography gutterBottom variant="h5" component="h2">
                         {title}  ${price}
                     </Typography>
+
                     <Typography variant="body2" color="textSecondary"
                                 component="p">
                         Lizards are a widespread group of squamate
@@ -42,7 +46,10 @@ export default function Product(props) {
                         across all continents except Antarctica
                     </Typography>
                 </CardContent>
+
             </CardActionArea>
+            </Link>
+
             <CardActions>
                 <Button
                     size="large"

@@ -9,7 +9,9 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import {Link} from "react-router-dom";
-import {LinearProgress} from "@material-ui/core";
+import {ProductConsumer} from "./context";
+
+
 
 const useStyles = makeStyles({
     card: {
@@ -26,8 +28,12 @@ export default function Product(props) {
     const classes = useStyles();
 
     return (
+<ProductConsumer>
+    {(value)=>(
+        <div  onClick = {()=> value.handleDetail(id)}>
         <Card className={classes.card}>
-            <Link to ='/details'>
+        <Link to ='/details'>
+
             <CardActionArea>
                 <CardMedia
                     className={classes.media}
@@ -46,29 +52,31 @@ export default function Product(props) {
                         across all continents except Antarctica
                     </Typography>
                 </CardContent>
-
             </CardActionArea>
-            </Link>
+        </Link>
+        <CardActions>
+            <Button
+                size="large"
+                color="primary"
+                disabled={inCart ? true : false}
+                onClick={() => {
+                   value.addToCart(id)
+                    value.openModal(id)
+                }}
+            >
+                {inCart
+                    ? (<p className='text-capitalize mb-0' disabled>
+                        {''}
+                        in inCart</p>)
+                    : (<AddShoppingCartIcon/>)
+                }
 
-            <CardActions>
-                <Button
-                    size="large"
-                    color="primary"
-                    disabled={inCart ? true : false}
-                    onClick={() => {
-                        console.log('added to the cart')
-                    }}
-                >
-                    {inCart
-                        ? (<p className='text-capitalize mb-0' disabled>
-                            {''}
-                            in inCart</p>)
-                        : (<AddShoppingCartIcon/>)
-                    }
+            </Button>
+        </CardActions>
+    </Card>
+        </div>)}
 
-                </Button>
-            </CardActions>
-        </Card>
+</ProductConsumer>
     );
 }
 

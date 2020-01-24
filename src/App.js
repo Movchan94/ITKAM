@@ -6,6 +6,7 @@ import ProductList from "./components/ProductList";
 import Details from "./components/Details";
 import Cart from "./components/Cart";
 import Default from "./components/Default";
+import Modal from "./components/Modal";
 
 
 class App extends React.Component {
@@ -14,18 +15,17 @@ class App extends React.Component {
             <div className={styles.App}>
 
                 <div className={styles.Header}>
-                <Navbar/>
+                    <Navbar/>
                 </div>
-
                 <div className={styles.Article}>
-                <Switch>
-                    <Route exact path='/' component={ProductList}/>
-                    <Route path='/details' component={Details}/>
-                    <Route path='/cart' component={Cart}/>
-                    <Route component={Default}/>
-                </Switch>
+                    <Switch>
+                        <Route exact path='/' component={ProductList}/>
+                        <Route path='/details' component={Details}/>
+                        <Route path='/cart' component={Cart}/>
+                        <Route component={Default}/>
+                    </Switch>
                 </div>
-
+                <Modal/>
                 <div className={styles.Footer}>Footer</div>
             </div>
 

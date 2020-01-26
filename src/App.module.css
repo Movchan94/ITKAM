@@ -23,3 +23,20 @@
 .Footer {
   grid-area: footer;
 }
+.btn-black{
+  background: transparent;
+  text-transform: capitalize;
+  font-size: 0.8rem ;
+  color:black;
+  border-radius:0;
+  border:0.1rem solid  black;
+}
+.btn-black:hover{
+  background: darkslategray;
+  color:whitesmoke;
+}
+.cart-icon {
+  cursor:pointer;
+  font-size:1.2rem;
+  color:yellow;
+}

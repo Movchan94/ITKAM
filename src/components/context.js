@@ -11,9 +11,8 @@ class ProductProvider extends React.Component {
         cart: [],
         modalOpen: false,
         modalProduct: detailProduct,
-        cartSubTotal: 0,
-        cartTax: 0,
-        cartTotal: 0
+        cartTotal: 0,
+
 
     }
 
@@ -66,17 +65,40 @@ class ProductProvider extends React.Component {
             return {modalOpen: false}
         })
     }
-    increment = (i) => {
-        console.log('this is increment method')
+    increment = (id) => {
+        let tempCart = [...this.state.cart]
+        const selectedProduct = tempCart.find(item=>item.id === id)
+
+        const index = tempCart.indexOf(selectedProduct)
+        const product = tempCart[index]
+
+        product.count = product.count + 1
+        product.total = product.count * product.price
+
+
+        this.setState(()=>{return{cart:[...tempCart]}},()=>{this.addTotals()})
     }
-    decrement = (i) => {
-        console.log('this is decrement method')
+    decrement = (id) => {
+        let tempCart = [...this.state.cart]
+        const selectedProduct = tempCart.find(item=>item.id === id)
+
+        const index = tempCart.indexOf(selectedProduct)
+        const product = tempCart[index]
+        product.count = product.count - 1
+
+        if(product.count === 0){
+            this.removeItem(id)
+        }else{
+            product.total = product.count * product.price
+            this.setState(()=>{return{cart:[...tempCart]}},()=>{this.addTotals()})
+        }
+
     }
     removeItem = (id)=>{
         let tempProducts = [...this.state.products]
         let tempCart =[...this.state.cart]
 
-        tempCart = tempCart.filter(item =>item.id !== id)
+        tempCart = tempCart.filter(item => item.id !== id)
 
         const index = tempProducts.indexOf(this.getItem(id))
         let removedProduct = tempProducts[index]
@@ -87,8 +109,10 @@ class ProductProvider extends React.Component {
         this.setState(()=>{
             return {
                 cart:[...tempCart],
-                products:[tempProducts]
+                products:[...tempProducts]
             }
+        },()=>{
+            this.addTotals()
         })
     }
     clearCart = ()=>{
@@ -101,16 +125,11 @@ class ProductProvider extends React.Component {
         })
     }
     addTotals =()=>{
-    let subTotal = 0;
-    this.state.cart.map(item=>(subTotal += item.total))
-        const tempTax = subTotal * 0.1
-        const tax = parseFloat(tempTax.toFixed(2))
-        const total  = subTotal + tax
+    let cartTotal = 0;
+    this.state.cart.map(item=>(cartTotal += item.total))
         this.setState(()=>{
             return {
-                cartSubTotal:subTotal,
-                cartTax:tax,
-                cartTotal:total
+                cartTotal:cartTotal,
             }
         })
 }
